@@ -4,11 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class UniqueOrNot {
+public class ReverseCStyleStr {
 
 	/**
-	 * 1.1  Implement an algorithm to determine if a string has all unique characters.
-	 * what if you can not use additional data structure.
+	 * 1.2 Write code to reverse a C-Style String.
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
@@ -18,22 +17,22 @@ public class UniqueOrNot {
 		String string = null;
 		System.out.println("please input 'quit' to quit!");
 		while(!(string = brBufferedReader.readLine()).equals("quit")) {
-			System.out.println(isUnique(string));
+			System.out.println(reverse(string.toCharArray()));
 		}
 	}
-	
-	private static boolean isUnique(String s) {
-		if(s == null || s.length() <= 1) {
-			return true;
+
+	private static String reverse(char[] c) {
+		// TODO Auto-generated method stub
+		if(c==null || c.length <= 2) {
+			return new String(c);
 		}
-		int n = s.length();
-		int checker = 0;
-		for(int i=0;i<n;i++) {
-			int temp = s.charAt(i)-'a';
-			if((checker & (1<<temp)) > 0)	return false;
-			checker |= (1<<temp);
+		int n = c.length;
+		for(int i=0,j=n-1;i<j;i++,j--) {
+			char temp = c[i];
+			c[i] = c[j];
+			c[j] = temp; 
 		}
-		return true;
+		return new String(c);
 	}
 
 }
