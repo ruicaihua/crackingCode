@@ -3,11 +3,15 @@ package com.chapter1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class RemoveDup {
 
 	/**
-	 * Design an algorithm and write code to remove the duplicate characters in a string without
+	 * 1.3Design an algorithm and write code to remove the duplicate characters in a string without
 	 * using any additional buffer.
 	 * @throws IOException 
 	 */
@@ -20,6 +24,9 @@ public class RemoveDup {
 		while(!(string = brBufferedReader.readLine()).equals("quit")) {
 			System.out.println(removeDupStr(string.toCharArray()));
 		}
+		
+		int []a = new int[] {1,2,3, 100};
+		System.out.println(cons(a));
 	}
 
 	private static String removeDupStr(char[] c) {
@@ -43,5 +50,27 @@ public class RemoveDup {
 		}
 		return new String(c);
 	}
-
+	
+	static int len(Set<Integer> a, int val,  boolean ase) {
+		int count = 0;
+		while (a.contains(val)) {
+			a.remove(val);
+			count++;
+			if (ase) val++;
+			else val--;
+		}
+		return count;
+	}
+	
+	private static int cons(int[] a) {
+		Set<Integer> hash_set = new HashSet<Integer>();
+		for (int i : a) {
+			hash_set.add(i);
+		}
+		int anx = 0;
+		for (int i : a) {
+			anx = Math.max(anx, len(hash_set, i, true) + len(hash_set, i-1, false));
+		}
+		return anx;
+	}
 }
